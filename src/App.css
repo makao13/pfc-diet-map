@@ -1,0 +1,308 @@
+/* ==========================================================================
+   各テーマごとの色の定義（ライトモード対応版）
+   ========================================================================== */
+.app-wrapper.theme-red {
+  --bg-gradient: linear-gradient(135deg, #0d0e12 0%, #1a1c24 100%);
+  --container-bg: rgba(26, 28, 36, 0.95);
+  --text-main: #ffffff;
+  --text-sub: #8e94a6;
+  --box-bg: #222530;
+  --card-bg: rgba(255, 255, 255, 0.03);
+  --card-border: rgba(255, 255, 255, 0.05);
+  --badge-bg: #171921;
+  --accent-color: #ff5252;
+  --accent-gradient: linear-gradient(45deg, #ff5252, #ff7b7b);
+  --btn-active-bg: #ffffff;
+  --btn-active-text: #12141c;
+}
+
+.app-wrapper.theme-green {
+  --bg-gradient: linear-gradient(135deg, #0d0e12 0%, #161a1e 100%);
+  --container-bg: rgba(22, 26, 30, 0.95);
+  --text-main: #ffffff;
+  --text-sub: #8a92a3;
+  --box-bg: #1e232a;
+  --card-bg: rgba(255, 255, 255, 0.02);
+  --card-border: rgba(255, 255, 255, 0.04);
+  --badge-bg: #13171c;
+  --accent-color: #ccff00;
+  --accent-gradient: linear-gradient(45deg, #ccff00, #9efb00);
+  --btn-active-bg: #ffffff;
+  --btn-active-text: #12141c;
+}
+
+.app-wrapper.theme-light {
+  --bg-gradient: linear-gradient(135deg, #eef2f7 0%, #dfe6e9 100%);
+  --container-bg: #ffffff;
+  --text-main: #2d3436;
+  --text-sub: #636e72;
+  --box-bg: #f1f5f9;
+  --card-bg: #ffffff;
+  --card-border: #e2e8f0;
+  --badge-bg: #e2e8f0;
+  --accent-color: #00cec9;
+  --accent-gradient: linear-gradient(45deg, #00cec9, #0984e3);
+  --btn-active-bg: #2d3436;
+  --btn-active-text: #ffffff;
+}
+
+/* ==========================================================================
+   共通レイアウト
+   ========================================================================== */
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.app-wrapper {
+  background: var(--bg-gradient);
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  transition: background 0.3s ease;
+}
+
+.app-container {
+  position: relative;
+  width: 100%;
+  max-width: 412px;
+  background: var(--container-bg);
+  min-height: 100vh;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+  padding: 28px 20px;
+  box-sizing: border-box;
+  color: var(--text-main);
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* テーマセレクター */
+.theme-selector {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: flex-end;
+  margin-bottom: 12px;
+}
+.theme-label {
+  font-size: 11px;
+  color: var(--text-sub);
+  font-weight: bold;
+}
+.theme-dot {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  padding: 0;
+  transition: transform 0.2s;
+}
+.theme-dot.active {
+  transform: scale(1.25);
+  border-color: var(--text-main);
+}
+.dot-red { background-color: #ff5252; }
+.dot-green { background-color: #ccff00; }
+.dot-light { background-color: #00cec9; box-shadow: inset 0 0 4px rgba(0,0,0,0.1); }
+
+h1 {
+  font-size: 26px;
+  letter-spacing: -0.5px;
+  margin-bottom: 6px;
+  font-weight: 800;
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.app-subtitle {
+  font-size: 13px;
+  color: var(--text-sub);
+  margin-top: 0;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+/* ★ 改善：すっきり大人のキャラクターBOXデザイン */
+.trainer-box {
+  display: flex;
+  gap: 10px;
+  background: var(--box-bg);
+  border: 1px solid var(--card-border);
+  padding: 10px 14px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  align-items: center;
+}
+.trainer-avatar {
+  font-size: 20px;
+  flex-shrink: 0;
+}
+.trainer-content {
+  font-size: 13px;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.trainer-name {
+  font-weight: 800;
+  color: var(--accent-color);
+}
+.trainer-bubble {
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+/* ★ 改善：3つのボタンが絶対に綺麗に均等に並ぶグリッド構造 */
+.preset-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  margin-bottom: 20px;
+}
+.preset-btn {
+  background: var(--card-bg);
+  color: var(--text-main);
+  border: 1px solid var(--card-border);
+  padding: 10px 2px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: center;
+  white-space: nowrap; /* 改行を防ぐ */
+}
+.preset-btn.active {
+  background: var(--accent-gradient);
+  color: #ffffff;
+  border-color: transparent;
+}
+
+/* フィルターエリア */
+.filter-box {
+  background: var(--box-bg);
+  border-radius: 20px;
+  padding: 20px;
+  margin-bottom: 24px;
+  border: 1px solid var(--card-border);
+}
+.slider-group label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.value-badge {
+  background: var(--badge-bg);
+  padding: 2px 8px;
+  border-radius: 6px;
+  color: var(--accent-color);
+  font-weight: 800;
+}
+.slider-group input[type="range"] {
+  width: 100%;
+  accent-color: var(--accent-color);
+  height: 6px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+/* カテゴリコンテナ */
+.category-container {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  margin-bottom: 28px;
+  scrollbar-width: none; 
+}
+.category-container::-webkit-scrollbar { display: none; }
+
+.category-btn {
+  flex-shrink: 0;
+  background-color: var(--box-bg);
+  color: var(--text-sub);
+  border: 1px solid var(--card-border);
+  padding: 9px 18px;
+  border-radius: 24px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.category-btn.active {
+  background-color: var(--btn-active-bg);
+  color: var(--btn-active-text);
+  font-weight: 800;
+}
+
+/* カードエリア */
+.results-box h3 {
+  font-size: 15px;
+  font-weight: 800;
+  margin-bottom: 16px;
+}
+.menu-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 18px;
+  padding: 18px;
+  margin-bottom: 14px;
+}
+.shop-name {
+  font-size: 11px;
+  background-color: var(--box-bg);
+  color: var(--accent-color);
+  padding: 3px 10px;
+  border-radius: 6px;
+  font-weight: 800;
+}
+.map-inline-btn {
+  background: transparent;
+  color: var(--accent-color);
+  border: 1px solid var(--card-border);
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.map-inline-btn:hover {
+  background-color: var(--accent-color);
+  color: #fff;
+}
+.menu-name {
+  font-size: 16px;
+  font-weight: 700;
+  margin-top: 10px;
+  margin-bottom: 14px;
+}
+.pfc-values {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.pfc-values span {
+  background: var(--box-bg);
+  padding: 5px 10px;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 700;
+}
+.pfc-values .kcal {
+  margin-left: auto;
+  background: transparent;
+  color: #ff9f43;
+  font-size: 14px;
+  font-weight: 800;
+}
+.no-result {
+  text-align: center;
+  color: var(--text-sub);
+  padding: 40px 0;
+}
